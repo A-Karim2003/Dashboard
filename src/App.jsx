@@ -23,9 +23,9 @@ export default function App() {
       <CookiesProvider>
         <SidebarProvider open={open} onOpenChange={handleOpenChange}>
           <AppSidebar />
-          <main className="w-full">
+          <main className="w-screen h-screen flex flex-col overflow-hidden">
             <Navbar />
-            <div>
+            <div className="p-4 flex-1 min-h-0 overflow-hidden">
               <Outlet />
             </div>
           </main>

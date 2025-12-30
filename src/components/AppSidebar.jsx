@@ -6,6 +6,7 @@ import {
   ChevronUp,
   Home,
   Inbox,
+  Laptop,
   Plus,
   Projector,
   Search,
@@ -29,6 +30,7 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
   SidebarSeparator,
+  useSidebar,
 } from "@/components/ui/sidebar";
 import { Link } from "react-router";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -75,18 +77,22 @@ const items = [
 ];
 
 export default function AppSidebar() {
+  const { open } = useSidebar();
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton>
+            <SidebarMenuButton asChild>
               <Link to="/" className="w-100 flex items-center gap-4">
-                <Avatar className={"size-7"}>
-                  <AvatarImage src={logo} alt="Logo" />
-                  <AvatarFallback>CN</AvatarFallback>
+                <Avatar>
+                  <AvatarImage
+                    src={logo}
+                    alt="Logo"
+                    className={`${open ? "w-12" : "w-6"}`}
+                  />
+                  <AvatarFallback>Profile</AvatarFallback>
                 </Avatar>
-
                 <span>Undefined</span>
               </Link>
             </SidebarMenuButton>
@@ -185,6 +191,7 @@ export default function AppSidebar() {
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton>
+                  <Laptop />
                   <span>Website Redesign</span>
                 </SidebarMenuButton>
                 <SidebarMenuSub>
