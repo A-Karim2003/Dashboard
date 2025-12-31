@@ -114,7 +114,7 @@ export default function CardList({ title }) {
               <CardTitle className={"text-sm text-nowrap"}>
                 {item.title}
               </CardTitle>
-              <Badge variant={"secondary"}>{item.badge}</Badge>
+              <Badge variant="primary">{item.badge}</Badge>
             </CardContent>
 
             <span>{item.count}</span>
