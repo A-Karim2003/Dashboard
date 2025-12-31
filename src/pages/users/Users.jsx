@@ -1,56 +1,100 @@
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
+import { useEffect, useState } from "react";
+import { DataTable } from "./payments/DataTable";
+import { columns } from "./payments/columns";
 
-import { Link } from "react-router";
-
-import styles from "./users.module.css";
-import CardList from "@/components/CardList";
-import UserBadges from "@/components/UserBadges";
-import UserInfo from "@/components/UserInfo";
-import Profile from "../profile/Profile";
-import UserActivity from "@/components/UserActivity";
+const getData = async () => {
+  return [
+    {
+      id: "728Ed521",
+      amount: 134,
+      status: "pending",
+      username: "John Doe",
+      email: "johndoe@gmail.com",
+    },
+    {
+      id: "728Ed522",
+      amount: 124,
+      status: "success",
+      username: "Jane Doe",
+      email: "janedoe@gmail.com",
+    },
+    {
+      id: "728Ed523",
+      amount: 167,
+      status: "success",
+      username: "Mike Galloway",
+      email: "mikegalloway@gmail.com",
+    },
+    {
+      id: "728Ed524",
+      amount: 156,
+      status: "failed",
+      username: "Minerva Robinson",
+      email: "minervarobinson@gmail.com",
+    },
+    {
+      id: "728Ed525",
+      amount: 145,
+      status: "success",
+      username: "Alice Smith",
+      email: "alicesmith@gmail.com",
+    },
+    {
+      id: "728Ed526",
+      amount: 182,
+      status: "pending",
+      username: "Bob Johnson",
+      email: "bobjohnson@gmail.com",
+    },
+    {
+      id: "728Ed527",
+      amount: 119,
+      status: "failed",
+      username: "Carol White",
+      email: "carolwhite@gmail.com",
+    },
+    {
+      id: "728Ed528",
+      amount: 173,
+      status: "success",
+      username: "David Brown",
+      email: "davidbrown@gmail.com",
+    },
+    {
+      id: "728Ed529",
+      amount: 138,
+      status: "pending",
+      username: "Eve Black",
+      email: "eveblack@gmail.com",
+    },
+    {
+      id: "728Ed52A",
+      amount: 161,
+      status: "success",
+      username: "Frank Green",
+      email: "frankgreen@gmail.com",
+    },
+  ];
+};
 
 export default function Users() {
-  return (
-    <div className={`w-full h-full flex flex-col`}>
-      <Breadcrumb>
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <Link to="/">Dashboard</Link>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <Link to="/users">Users</Link>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbPage>John Doe</BreadcrumbPage>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
+  const [data, setData] = useState(null);
 
-      <div className={`${styles.grid}`}>
-        <div className={`${styles.box1} flex flex-col justify-center gap-4`}>
-          <UserBadges />
-        </div>
-        <div className={styles.box2}>
-          <Profile />
-        </div>
-        <div className={styles.box3}>
-          <UserInfo />
-        </div>
-        <div className={styles.box4}>
-          <CardList title={"Latest Transactions"} />
-        </div>
-        <div className={styles.box5}>
-          <UserActivity />
-        </div>
-      </div>
+  console.log(data);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const transactionData = await getData();
+      setData(transactionData);
+    };
+
+    fetchData();
+  }, []);
+
+  if (!data) return <h1>Loading...</h1>;
+  return (
+    <div>
+      <DataTable data={data} columns={columns} />
     </div>
   );
 }
